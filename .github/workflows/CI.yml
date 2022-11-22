@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Copy config file
+      run: |
+        cp nuxt.config-live.tmpl.js nuxt.config.js
     - name: Install javascript dependencies
       run: |
         npm install
@@ -18,6 +21,7 @@ jobs:
         npm run gen-gh
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
