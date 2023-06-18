@@ -2,7 +2,7 @@ _site
 .jekyll-cache
 node_modules
 docs/.vuepress/dist
-*.html
+dist/*.html
 *.py
 out.md
 .DS_Store
