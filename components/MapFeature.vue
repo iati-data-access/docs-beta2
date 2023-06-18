@@ -57,7 +57,7 @@ export default {
           this.clickRegion()
         })
         layer.bindTooltip(
-          `<b>${this.regionName}</b><br />Amount (${this.currency.toUpperCase()}): ${this.value}`,
+          `<b>${this.regionName}</b><br />${this.$t('dataDashboards.amount')} (${this.currency.toUpperCase()}): ${this.value}`,
           { permanent: false,
             sticky: true}
         );
@@ -70,7 +70,7 @@ export default {
       return this.regionData[this.iso2] ? this.regionData[this.iso2].opacity : 0
     },
     optionsStyle() {
-      const _fillColor = this.regionColours[this.regionName] || "#ffffff"
+      const _fillColor = this.regionColours || "#ffffff"
       return {
         fillColor: _fillColor,
         weight: 1,

@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       isBusy: true,
-      valueLabel: `Amount (${this.currency.toUpperCase()})`
+      valueLabel: `${this.$t('dataDashboards.amount')} (${this.currency.toUpperCase()})`
     }
   },
   props: {
@@ -43,10 +43,22 @@ export default {
     },
     'height': {
       default: '400px'
+    },
+    'selectedDrilldown': {
+      default() { return function () {} }
     }
   },
   components: {
     BarChart
+  },
+  methods: {
+    handleClick(evt, item) {
+      if (this.clickable == false) { return }
+      if (item.length == 0) { return }
+      const itemIndex = item[0]._index
+      const cell = this.cells[item[0]._index]
+      this.selectedDrilldown(cell[`${this.drilldown}.code`])
+    }
   },
   computed: {
     barChartHeight() {
@@ -54,6 +66,11 @@ export default {
     },
     barChartOptions(){
       return {
+        onClick: this.handleClick,
+        onHover: (event, chartElement) => {
+          if (this.clickable == false) { return }
+          event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+        },
         maintainAspectRatio: false,
         tooltips: {
           callbacks: {
@@ -61,7 +78,8 @@ export default {
               return this.chartData.labels[tooltipItem[0].index]
             }),
             label: ((tooltipItem, data) => {
-              var label = this.valueLabel || '';
+              const datasetLabel = data.datasets[tooltipItem.datasetIndex].label
+              var label = `${datasetLabel} (${this.currency.toUpperCase()})` || '';
 
               if (label) {
                   label += ': ';

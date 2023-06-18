@@ -31,10 +31,14 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/local-components.js', '~/plugins/vue-select.js', {
-    src: '~/plugins/leaflet.js',
-    mode: 'client'
-  }
+  plugins: ['~/plugins/local-components.js', '~/plugins/vue-select.js',
+    {
+      src: '~/plugins/leaflet.js',
+      mode: 'client'
+    },
+    {
+      src: '~plugins/vuedraggable.js'
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -42,7 +46,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/gtm'
+    '@nuxtjs/gtm',
+    'vue-plausible',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -59,7 +64,7 @@ export default {
 
   fontawesome: {
     icons: {
-      solid: ['faGear', 'faDownload', 'faTable', 'faChartSimple', 'faMap'],
+      solid: ['faGear', 'faDownload', 'faTable', 'faChartSimple', 'faMap', 'faWandMagicSparkles'],
       regular: []
     }
   },
@@ -82,22 +87,22 @@ export default {
       {
         code: 'en',
         iso: 'en-GB',
-        file: 'en-GB.json'
+        file: 'en.json'
       },
       {
         code: 'fr',
         iso: 'fr-FR',
-        file: 'fr-FR.json'
+        file: 'fr.json'
       },
       {
         code: 'es',
         iso: 'es-ES',
-        file: 'es-ES.json'
+        file: 'es.json'
       },
       {
         code: 'pt',
         iso: 'pt-PT',
-        file: 'pt-PT.json'
+        file: 'pt.json'
       }
     ],
     langDir: 'locales/',
@@ -119,6 +124,12 @@ export default {
   // Google Tag Manager
   gtm: {
     id: 'GTM-TRBGNFQ',
+  },
+
+  // Plausible
+  plausible: {
+    domain: 'countrydata.iatistandard.org',
+    enableAutoOutboundTracking: true,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -1,28 +1,27 @@
 import Vue from "vue";
 import axios from "axios";
 
-const baseURL = "https://humportal.org";
-const apiURL = "https://humportal.github.io/humportal-data";
-const analyticsURL =
-  "https://raw.githubusercontent.com/codeforIATI/IATI-Stats-public/gh-pages";
-
 export const state = () => ({
   availableDrilldowns: {
+    "activity.iati_identifier": "Activity IATI Identifier",
+    "activity.title": "Activity Title",
     "reporting_organisation": "Reporting Organisation",
     "reporting_organisation_type": "Reporting Organisation Type",
-    "recipient_country_or_region": "Country or Region",
-    "sector_category": "Sector Category",
-    "sector": "Sector",
-    "activity.title": "Activity Title",
-    "activity.iati_identifier": "Activity IATI Identifier",
-    "provider_organisation.name": "Provider Organisation",
-    "receiver_organisation.name": "Receiver Organisation",
     "aid_type": "Aid Type",
     "finance_type": "Finance Type",
+    "flow_type": "Flow Type",
+    "provider_organisation": "Provider Organisation",
+    "provider_organisation_type": "Provider Organisation Type",
+    "receiver_organisation": "Receiver Organisation",
+    "receiver_organisation_type": "Receiver Organisation Type",
+    "recipient_country_or_region": "Recipient Country or Region",
+    "multi_country": "Multi Country",
+    "sector_category": "Sector Category",
+    "sector": "Sector",
     "humanitarian": "Humanitarian",
-    "transaction_type": "Transaction Type",
-    "year": "Year",
-    "quarter": "Quarter",
+    "year.year": "Calendar Year",
+    "quarter.quarter": "Calendar Quarter",
+    "calendar_year_and_quarter.calendar_year_and_quarter": "Calendar Year and Quarter"
   },
   codelistLookups: {
     reporting_organisation: 'ReportingOrganisation',
@@ -35,6 +34,10 @@ export const state = () => ({
     sector: 'Sector',
     recipient_country_or_region: 'Country'
   },
+  reportingOrganisationGroup: [],
+  fieldsEN: {
+    reporting_organisation: {}
+  },
   fields: {
     reporting_organisation: [],
     reporting_organisation_type: [],
@@ -42,33 +45,31 @@ export const state = () => ({
     finance_type: [],
     flow_type: [],
     transaction_type: [],
-    sector_category: [],
-    sector: [],
     recipient_country_or_region: [],
-    humanitarian: [
+    multi_country: [
       {
-        code: 0,
-        label: "Not Humanitarian"
+        code: "0",
+        label: "Not Multi Country"
       },
       {
-        code: 1,
+        code: "1",
+        label: "Multi Country"
+      }
+    ],
+    sector_category: [],
+    sector: [],
+    humanitarian: [
+      {
+        code: "0",
+        label: "Development"
+      },
+      {
+        code: "1",
         label: "Humanitarian"
       }
     ]
   },
-  fieldNames: {
-    reporting_organisation: {'en': 'Reporting Organisation'},
-    reporting_organisation_type: {'en': 'Reporting Organisation Type'},
-    aid_type:  {'en': 'Aid Type'},
-    finance_type:  {'en': 'Finance Type'},
-    flow_type:  {'en': 'Flow Type'},
-    transaction_type:  {'en': 'Transaction Type'},
-    sector_category:  {'en': 'Sector Category'},
-    sector:  {'en': 'Sector'},
-    recipient_country_or_region:  {'en': 'Recipient Country or Region'},
-    humanitarian:  {'en': 'Humanitarian'}
-  },
-  codelistsRetrieved: false,
+  codelistsRetrieved: null,
   years: ['2014', '2015', '2016', '2017',
         '2018', '2019', '2020', '2021', '2022',
         '2023', '2024', '2025', '2026', '2027',
@@ -77,34 +78,11 @@ export const state = () => ({
 });
 
 export const mutations = {
-  setFields(state, { field, values }) {
-    Vue.set(state.fields, field, values);
-    state.codelistsRetrieved = true
-  },
-  setCodelistsRetrieved(state, value) {
-    state.codelistsRetrieved = value
-  }
-};
-
-export const actions = {
-  async getCodelists({commit, state, dispatch}) {
-    if (state.codelistsRetrieved == false) {
-      commit('setCodelistsRetrieved', null)
-      Object.keys(state.fields).forEach(field => {
-        const codelist = state.codelistLookups[field]
-        if (codelist == undefined) {
-          return
-        }
-        dispatch('getCodelistData', {field: field, codelist: codelist})
-      })
-    }
-  },
-  async getCodelistData({ commit }, { field, codelist }) {
-    const response = await axios.get(`https://codelists.codeforiati.org/api/json/en/${codelist}.json`
-      )
-    const data = response.data.data
+  setFields(state, {field, data, locale}) {
     var codes = Object.values(data.reduce((summary, item) => {
-      if (item['status'] != 'active') {
+      // We don't show withdrawn countries or reporting organisations anywhere
+      if ((['recipient_country_or_region', 'reporting_organisation'].includes(field)) &&
+        (item['status'] != 'active')) {
         return summary
       }
       var code, name, label = null
@@ -115,6 +93,11 @@ export const actions = {
         var code = String(item.code)
         var name = String(item.name).trim()
       }
+      // Fall back to EN language for reporting organisation
+      // (translations of other codelists should be up to date!)
+      if ((field == 'reporting_organisation') && (locale != 'en') && (name === 'null')) {
+        name = state.fieldsEN.reporting_organisation[code].name
+      }
       if (['recipient_country_or_region', 'reporting_organisation', 'reporting_organisation_type'].includes(field)) {
         var label = name
       } else {
@@ -124,14 +107,107 @@ export const actions = {
       summary[code] = {
         code: code,
         label: label,
-        name: name
+        name: name,
+        status: item.status
       }
       return summary
     }, {}))
     if (['recipient_country_or_region', 'reporting_organisation'].includes(field)) {
       codes = codes.sort((a,b) => a.name > b.name ? 1 : -1);
     }
+    if (field == 'transaction_type') {
+      codes = codes.filter(code => {
+        return ['1','2', '3','4'].includes(code.code)
+      })
+      const budgetTranslations = {
+        'en': 'Budget',
+        'fr': 'Budget',
+        'es': 'Presupuesto',
+        'pt': 'Orçamento',
+      }
+      const budgetName = budgetTranslations[this.$i18n.locale]
+      codes.push({
+        code: 'budget',
+        label: budgetName,
+        name: budgetName
+      })
+    }
+    Vue.set(state.fields, field, codes);
+    if ((field == 'reporting_organisation') && (locale == 'en')) {
+      const codes_obj = codes.reduce((summary, item) => {
+        summary[item.code] = item
+        return summary
+      }, {})
+      Vue.set(state.fieldsEN, 'reporting_organisation', codes_obj)
+    }
+  },
+  setCodelistsRetrieved(state, value) {
+    state.codelistsRetrieved = value
+  },
+  setAvailableDrilldowns(state, value) {
+    state.availableDrilldowns = value
+  },
+  setReportingOrganisationGroup(state, data) {
+    state.reportingOrganisationGroup = Object.values(
+      data.reduce((summary, item) => {
+        // Ignore withdrawn codes
+        if (item.status == 'withdrawn') { return summary }
+        const group_code = String(item['codeforiati:group-code'])
+        const group_name = item['codeforiati:group-name']
+        if (!(group_code in summary)) {
+          summary[group_code] = {
+            code: group_code,
+            label: group_name,
+            name: group_name,
+            items: []
+          }
+        }
+        summary[group_code].items.push(item.code)
+        return summary
+      }, {})
+    ).sort((a,b) => a.name > b.name ? 1 : -1)
+  }
+};
 
-    commit('setFields', {field: field, values: codes})
+export const actions = {
+  async getCodelists({commit, state, dispatch}) {
+    if (state.codelistsRetrieved != this.$i18n.locale) {
+      commit('setCodelistsRetrieved', this.$i18n.locale)
+      commit('setAvailableDrilldowns', this.$i18n.t('dataDashboards.availableDrilldowns'))
+      Object.keys(state.fields).forEach(field => {
+        const codelist = state.codelistLookups[field]
+        if (codelist == undefined) {
+          return
+        }
+        dispatch('getCodelistData', {field: field, codelist: codelist})
+      })
+      dispatch('getCodelistData', { field: 'reporting_organisation_group', codelist: 'ReportingOrganisationGroup' })
+    }
+  },
+  async getCodelistData({ commit, state, dispatch }, { field, codelist, locale = this.$i18n.locale }) {
+    // Also load reporting organisation codelist in EN if
+    // the locale is not EN.
+    if ((field == 'reporting_organisation') && (locale != 'en') && (Object.keys(state.fieldsEN.reporting_organisation).length===0)) {
+      await dispatch('getCodelistData', {field: field, codelist: codelist, locale: 'en'})
+    }
+    const response = await axios.get(`https://codelists.codeforiati.org/api/json/${locale}/${codelist}.json`
+      )
+    var data = response.data.data
+    if (field == 'recipient_country_or_region') {
+      const response_regions = await axios.get(`https://codelists.codeforiati.org/api/json/${locale}/Region.json`
+      )
+      var data_regions = response_regions.data.data
+      commit('setFields', {field: field, data: data.concat(data_regions), locale: locale})
+    } else if (field == 'reporting_organisation_group') {
+      commit('setReportingOrganisationGroup', data)
+    } else {
+      commit('setFields', {field: field, data: data, locale: locale})
+    }
+  },
+  async nuxtServerInit({commit, state, dispatch}) {
+    this.dispatch('getCodelistData', { field: 'recipient_country_or_region', codelist: 'Country' })
+    this.dispatch('getCodelistData', { field: 'sector_category', codelist: 'SectorGroup' })
+    this.dispatch('getCodelistData', { field: 'reporting_organisation', codelist: 'ReportingOrganisation' })
+    this.dispatch('getCodelistData', { field: 'reporting_organisation_group', codelist: 'ReportingOrganisationGroup' })
   }
 };

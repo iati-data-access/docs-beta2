@@ -1,0 +1,171 @@
+{
+  "title": "Country Development Finance Data",
+  "description": "Datos de la IATI sobre la financiación para el desarrollo de los países",
+  "language": "es",
+  "selectText": "Idiomas",
+  "label": "Español",
+  "ariaLabel": "Idiomas",
+  "home": "Página de inicio",
+  "about": "Acerca de",
+  "aboutNav": [
+    ["/es/introduction/", "Antecedentes"],
+    ["/es/methodology/", "Metodología"],
+    ["/es/data-notes/", "Notas sobre datos"],
+    ["/es/guidance-analysis/", "Paneles de orientación y análisis en Excel"]
+  ],
+  "accessAnalyseOptions": [
+    {
+      "value": "suD8WMo5BXs",
+      "text": "Acceder y comprender los datos"
+    },
+    {
+      "value": "sqJRWU7QJKI",
+      "text": "Analizar los datos"
+    }
+  ],
+  "homepageLookingGuidanceAnalysis": "¿Busca los paneles de orientación y análisis? Los hemos trasladado a la sección “Acerca de”.",
+  "exploreDataDashboards": "Explorar los paneles de datos",
+  "by": "por",
+  "dataDashboards": {
+    "label": "Paneles de datos",
+    "overview": "Panel de síntesis",
+    "dashboards": "Paneles:",
+    "customise": "Personalizar",
+    "customDownload": "Descarga de datos personalizados",
+    "customDownloadText": "Elija las columnas que se incluirán en su hoja de cálculo y seleccione los filtros para restringir su búsqueda. Descargue el conjunto personalizado de datos en Excel.",
+    "dataSource": "La fuente de estos datos son las organizaciones que publican datos en la IATI. Los datos se actualizan una vez al día para capturar datos nuevos o actualizados publicados en el Registro de la IATI. Se pueden encontrar detalles adicionales en la sección {methodology}.",
+    "dataSourceContact": "Para soporte o capacitación, comuníquese con {emailContact}",
+    "emailContact": "support@iatistandard.org",
+    "columns": "Columnas",
+    "selectColumns": "Seleccionar columnas",
+    "selectAtLeastOneColumn": "Debe seleccionar al menos una columna",
+    "dragColumnsToReorder": "Arrastre las columnas para cambiar el orden de los productos",
+    "deselect": "Deseleccionar",
+    "filters": "Filtros",
+    "filtersText": "Seleccione filtros para personalizar la visualización.",
+    "selectedFilters": "Filtros aplicados",
+    "preview": "Vista previa",
+    "currency": "Moneda",
+    "calendarYear": "Año natural",
+    "calendarYearAndQuarter": "Año y trimestre natural",
+    "moreFilters": "Más filtros",
+    "numberOfResults": "Número de resultados",
+    "displayOptions": "Opciones de presentación",
+    "noResults": "Los filtros seleccionados no han arrojado resultados.",
+    "selectSomeOptions": "Seleccione algunas opciones y haga clic en “Ejecutar” a la izquierda.",
+    "amount": "Valor",
+    "budgetsSpending": {
+      "budgetsOrSpending": "Flujos de Recursos",
+      "budgets": "Presupuestos",
+      "spending": "Gastos",
+      "both": "Ambos"
+    },
+    "transactionTypes": "Transaction Type",
+    "switchTransactionTypes": {
+      "toAdvanced": "Switch to advanced: select transaction types",
+      "toSimple": "Switch to simple: select budget and/or spending"
+    },
+    "reportingOrganisationGroup": {
+      "select": "Seleccione grupos de organizaciones notificadoras para organizaciones que publican datos bajo varias organizaciones notificadoras.",
+      "apply": "Apply",
+      "label": "Grupos de Organizaciones Notificadoras",
+      "selectOne": "Seleccione un grupo..."
+    },
+    "countries": {
+      "by": "por País o región receptores",
+      "label": "Países y regiónes",
+      "for": "Panel para",
+      "select": "Seleccione un país o región para explorar los datos."
+    },
+    "providers": {
+      "by": "por Organización notificadora",
+      "label": "Organizaciónes notificadoras",
+      "for": "Panel para",
+      "select": "Seleccione un organización notificadora para explorar los datos."
+    },
+    "sectors": {
+      "by": "por Categoría de sector",
+      "label": "Categorías de sectores",
+      "for": "Panel para",
+      "select": "Seleccione un sector para explorar los datos."
+    },
+    "summary": "Resumen",
+    "spendSummaryChartText": "Este gráfico muestra los presupuestos y gastos de los tres años anteriores, el año en curso y los tres años siguientes. Los filtros sobre flujos de recursos y años y trimestres naturales no se han aplicado a este gráfico.",
+    "exploreTheData": "Explorar los datos",
+    "availableDrilldowns": {
+      "activity.iati_identifier": "Identificador de la IATI de la actividad",
+      "activity.title": "Título de la actividad",
+      "activity.description": "Activity Description",
+      "reporting_organisation": "Organización notificadora",
+      "reporting_organisation_type": "Tipo de organización notificadora",
+      "aid_type": "Tipo de ayuda",
+      "finance_type": "Tipo de financiación",
+      "flow_type": "Tipo de flujo",
+      "provider_organisation": "Organización proveedora",
+      "provider_organisation_type": "Tipo de organización proveedora",
+      "receiver_organisation": "Organización receptora",
+      "receiver_organisation_type": "Tipo de organización receptora",
+      "recipient_country_or_region": "País o región receptores",
+      "multi_country": "Multinacional",
+      "sector_category": "Categoría de sector",
+      "sector": "Sector",
+      "humanitarian": "Asistencia humanitaria / desarrollo",
+      "year.year": "Año natural",
+      "quarter.quarter": "Trimestre natural",
+      "calendar_year_and_quarter.calendar_year_and_quarter": "Año y trimestre natural"
+    },
+    "unavailableDrilldowns": {
+      "transaction_type": "Flujos de Recursos",
+      "year": "Año natural",
+      "quarter": "Trimestre natural",
+      "calendar_year_and_quarter": "Año y trimestre naturales"
+    },
+    "activity": "Actividad"
+  },
+  "dataSidebarDropdowns": [
+    {
+      "path": "/es/data/recipient-country-or-region/",
+      "name": "data-recipient-country-or-region",
+      "label": "por País o Région",
+      "field": "recipient_country_or_region"
+    },
+    {
+      "path": "/es/data/reporting-organisation/",
+      "name": "data-reporting-organisation",
+      "label": "por Organización notificadora",
+      "field": "reporting_organisation"
+    },
+    {
+      "path": "/es/data/sector-category/",
+      "name": "data-sector-category",
+      "label": "por Sector",
+      "field": "sector_category"
+    }
+  ],
+  "translations": {
+    "selectCountry": "Seleccionar un país",
+    "downloadFile": "Descargar archivo",
+    "lastUpdated": "Última actualización:",
+    "language": "Idioma"
+  },
+  "countriesCurrenciesFields": [
+    {
+      "key": "countryCode",
+      "label": "Código del país"
+    },
+    {
+      "key": "countryName",
+      "label": "Nombre del país"
+    },
+    {
+      "key": "currency",
+      "label": "Moneda"
+    }
+  ],
+  "languageOptions": [
+    {"value": "en", "text": "inglés"},
+    {"value": "fr", "text": "francés"},
+    {"value": "es", "text": "español"},
+    {"value": "pt", "text": "portugués"}
+  ]
+}

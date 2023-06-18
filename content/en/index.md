@@ -1,42 +1,60 @@
 # Country Development Finance Data
 
-<p class="lead">Download simple Excel-formatted data on commitments, disbursements and expenditures, as well as forward-looking budgets, presented simply by country and region and designed to enable easy analysis in a pivot table.</p>
+<p class="lead">Access data on development and humanitarian activities, presented simply by country, reporting organisation and sector. Visualise or download the data for easy analysis.</p>
 
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/kZxxmf8uMEI?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="margin:0px 0px 10px 0px;"></iframe>
 
-<div class="text-md-center ml-md-5 mr-md-5">
+<b-card img-src="/data-dashboards-background-countries.png" img-alt="Image" overlay body-class="d-flex align-items-center">
+  <b-btn block variant="primary" to="/data/">Explore Data Dashboards <font-awesome-icon :icon="['fa', 'chart-simple']" /></b-btn>
+</b-card>
+<b-row class="mt-2">
+    <b-col lg="4">
+        <b-btn block
+            variant="outline-primary"
+            class="mb-2"
+            to="/data/recipient-country-or-region/">by Recipient Country or Region</b-btn>
+    </b-col>
+    <b-col lg="4">
+        <b-btn block
+            variant="outline-primary"
+            class="mb-2"
+            to="/data/reporting-organisation/">by Reporting Organisation</b-btn>
+    </b-col>
+    <b-col lg="4">
+        <b-btn block
+            variant="outline-primary"
+            class="mb-2"
+            to="/data/sector-category/">by Sector Category</b-btn>
+    </b-col>
+</b-row>
+
+<hr />
+
+<b-card-group>
+
+<b-card class="text-md-center">
 
 ## Access data files
 
 <download-file></download-file>
 
+</b-card>
+    <b-card>
+        <p><b-btn block variant="primary" to="/data/custom/">Custom data download <font-awesome-icon :icon="['fa', 'wand-magic-sparkles']" /></b-btn></p>
+        <p>Choose the columns to be included in your spreadsheet and select the filters to narrow your search. Download the custom set of data in Excel.</p>
+    </b-card>
+</b-card-group>
+<hr />
+<b-alert show variant="secondary" class="text-center">
+	<p>Looking for the guidance and analysis dashboards? We've moved this content to the About section.</p>
+	<b-btn variant="secondary" to="/guidance-analysis/">Guidance and analysis dashboards &raquo;</b-btn>
+</b-alert>
+<hr />
+<div class="text-center">
+    <p class="font-weight-bold">IATI data access tools:</p>
+    <a href="https://countrydata.iatistandard.org/">Country Development Finance Data Tool</a><br />
+    <a href="https://d-portal.org/ctrack.html#view=search">d-portal</a><br />
+    <a href="https://datastore.iatistandard.org/">Datastore Search</a><br />
 </div>
-
-## Guidance and Analysis Dashboard
-
-The following guidance materials outline how to use the IATI Country Development Finance Data tool. The Excel Analysis Dashboard can be used to generate quick analysis in Excel using the outputs from this tool. See the guidance note for more detail.
-
-### Guidance
-
-* [EN - IATI Country Development Finance Data Guidance](/guidance/IATI%20CDFD%20Guidance_v2_EN.pdf)
-* [FR - Lignes directrices de l’IITA concernant les données nationales relatives au financement du développement](/guidance/IATI%20CDFD%20Guidance_v2_FR.pdf)
-* [ES - Orientación de la IATI relativa a los Datos sobre Financiación para el Desarrollo de los Países](/guidance/IATI%20CDFD%20Guidance_v2_ES.pdf)
-* [PT - Orientação para os Dados sobre Financiamento do Desenvolvimento dos Países da IATI](/guidance/IATI%20CDFD%20Guidance_v2_PT.pdf)
-
-### Excel Analysis Dashboard
-
-* [For use with January-December fiscal year (works with English files)](/dashboards/v2%20IATI%20CDFD%20Analysis%20Dashboard_Jan-Dec.xlsx)
-* [For use with January-December fiscal year (works with French files)](/dashboards/v2%20Tableau%20de%20bord%20d’analyse%20de%20l’outil%20CDFD%20de%20l’IITA_Jan-Dec_FR.xlsx)
-* [For use with January-December fiscal year (works with Spanish files)](/dashboards/v2%20Panel%20de%20analisis_Eni-Dic_ES.xlsx)
-* [For use with January-December fiscal year (works with Portuguese files)](/dashboards/v2%20Painel%20de%20Análise%20de%20DFDP%20da%20IATI_Jan-Dez_PT.xlsx)
-
-
-_Complete examples:_
-
-* [English: Malawi](/dashboards/v2%20IATI%20CDFD%20Analysis%20Dashboard_Jan-Dec_Malawi%20Example.xlsx)
-* [French: Madagascar](/dashboards/v2%20Tableau%20de%20bord%20d’analyse%20de%20l’outil%20CDFD%20de%20l’IITA_Jan-Déc_FR_Madagascar.xlsx)
-* [Spanish: Colombia](/dashboards/v2%20Panel%20de%20análisis_Eni-Dic_ES_Colombia.xlsx)
-* [Portuguese: Sao Tome e Prinicipe](/dashboards/v2%20Painel%20de%20Análise%20de%20DFDP%20da%20IATI_Jan-Dez_PT_São%20Tomé%20e%20Príncipe.xlsx)
 
 <p class="center-logo">
 	<img src="/powered-by-iati.png" alt="Powered by IATI Data" />

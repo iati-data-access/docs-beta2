@@ -9,7 +9,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Copy config file
       run: |
         cp nuxt.config-live.tmpl.js nuxt.config.js
@@ -19,9 +19,12 @@ jobs:
     - name: Run build
       run: |
         npm run gen-gh
+    - name: Run build
+      run: |
+        cp 404.html dist/404.html
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.ref == 'refs/heads/nuxtjs-rewrite' }}
+      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist

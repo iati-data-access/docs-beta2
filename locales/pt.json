@@ -1,0 +1,171 @@
+{
+  "title": "Country Development Finance Data",
+  "description": "Dados sobre Financiamento do Desenvolvimento dos Países da IATI",
+  "language": "pt",
+  "selectText": "Idiomas",
+  "label": "Português",
+  "ariaLabel": "Idiomas",
+  "home": "Página inicial",
+  "about": "Acerca de",
+  "aboutNav": [
+    ["/pt/introduction/", "Introdução"],
+    ["/pt/methodology/", "Metodologia"],
+    ["/pt/data-notes/", "Notas sobre os dados"],
+    ["/pt/guidance-analysis/", "Orientações e painéis de análise Excel"]
+  ],
+  "accessAnalyseOptions": [
+    {
+      "value": "8WXdwNmZY18",
+      "text": "Acessar e compreender dados"
+    },
+    {
+      "value": "_2KpvSiZTQY",
+      "text": "Analisar dados"
+    }
+  ],
+  "homepageLookingGuidanceAnalysis": "Procura orientações e painéis de análise? Transferimos este conteúdo para a secção “Acerca de”",
+  "exploreDataDashboards": "Explorar os painéis de dados",
+  "by": "por",
+  "dataDashboards": {
+    "label": "Painéis de dados",
+    "overview": "Painel de síntese",
+    "dashboards": "Painéis",
+    "customise": "Personalizar",
+    "customDownload": "Descarregar dados personalizados",
+    "customDownloadText": "Escolha as colunas a serem incluídas em sua planilha e selecione os filtros para refinar sua pesquisa. Baixe o conjunto personalizado de dados no Excel.",
+    "dataSource": "A fonte desses dados são as organizações que publicam dados para a IATI. Os dados são atualizados uma vez por dia para capturar dados novos ou atualizados publicados no Registo da IATI. Detalhes adicionais podem ser encontrados na seção {methodology}.",
+    "dataSourceContact": "Para suporte ou treinamento, entre em contato com {emailContact}",
+    "emailContact": "support@iatistandard.org",
+    "columns": "Colunas",
+    "selectColumns": "Selecionar colunas",
+    "selectAtLeastOneColumn": "Tem de selecionar pelo menos uma coluna",
+    "dragColumnsToReorder": "Arraste as colunas para reordenar o resultado",
+    "deselect": "Anular a seleção",
+    "filters": "Filtros",
+    "filtersText": "Selecione os filtros para personalizar a visualização.",
+    "selectedFilters": "Filtros aplicados",
+    "preview": "Pré-visualização",
+    "currency": "Moeda",
+    "calendarYear": "Ano civil",
+    "calendarYearAndQuarter": "Ano e trimestre civis",
+    "moreFilters": "Ano e trimestre civis",
+    "numberOfResults": "Número de resultados",
+    "displayOptions": "Opções de apresentação",
+    "noResults": "Não há resultados para os filtros que selecionou",
+    "selectSomeOptions": "Selecione algumas opções e clique em Executar à esquerda.",
+    "amount": "Valor",
+    "budgetsSpending": {
+      "budgetsOrSpending": "Fluxos de Recursos",
+      "budgets": "Orçamentos",
+      "spending": "Despesas",
+      "both": "Ambos"
+    },
+    "transactionTypes": "Transaction Type",
+    "switchTransactionTypes": {
+      "toAdvanced": "Switch to advanced: select transaction types",
+      "toSimple": "Switch to simple: select budget and/or spending"
+    },
+    "reportingOrganisationGroup": {
+      "select": "Selecione grupos de organizações relatórios para organizações que publicam dados em várias organizações relatórios.",
+      "apply": "Apply",
+      "label": "Grupos Organizacionais Relatórios",
+      "selectOne": "Selecione um grupo..."
+    },
+    "countries": {
+      "by": "por País ou região recetor",
+      "label": "País ou região recetor",
+      "for": "Painel para",
+      "select": "Selecione um país ou região para explorar os dados."
+    },
+    "providers": {
+      "by": "por Organização relatora",
+      "label": "Organizaçãos relatoras",
+      "for": "Painel para",
+      "select": "Selecione um organização relatora para explorar os dados."
+    },
+    "sectors": {
+      "by": "por Sector",
+      "label": "Sectores",
+      "for": "Painel para",
+      "select": "Selecione um sector para explorar os dados."
+    },
+    "summary": "Resumo",
+    "spendSummaryChartText": "Este gráfico mostra orçamentos e despesas para os três anos anteriores, para o ano corrente e para os três anos seguintes. Filtros sobre fluxos de recursos e anos civis e trimestres não foram aplicados a este gráfico.",
+    "exploreTheData": "Explore os dados",
+    "availableDrilldowns": {
+      "activity.iati_identifier": "Identificador de atividade da IATI",
+      "activity.title": "Título da atividade",
+      "activity.description": "Activity Description",
+      "reporting_organisation": "Organização relatora",
+      "reporting_organisation_type": "Tipo de organização relatora",
+      "aid_type": "Tipo de ajuda",
+      "finance_type": "Tipo de financiamento",
+      "flow_type": "Tipo de fluxo",
+      "provider_organisation": "Organização prestadora",
+      "provider_organisation_type": "Tipo de organização prestadora",
+      "receiver_organisation": "Organização recetora",
+      "receiver_organisation_type": "Tipo de organização recetora",
+      "recipient_country_or_region": "País ou região recetor",
+      "multi_country": "Plurinacional",
+      "sector_category": "Categoria de sector",
+      "sector": "Sector",
+      "humanitarian": "Humanitário / desenvolvimento",
+      "year.year": "Ano civil",
+      "quarter.quarter": "Trimestre civil",
+      "calendar_year_and_quarter.calendar_year_and_quarter": "Ano e trimestre civis"
+    },
+    "unavailableDrilldowns": {
+      "transaction_type": "Fluxos de Recurso",
+      "year": "Ano civil",
+      "quarter": "Trimestre civil",
+      "calendar_year_and_quarter": "Ano e trimestre civis"
+    },
+    "activity": "Atividade"
+  },
+  "dataSidebarDropdowns": [
+    {
+      "path": "/pt/data/recipient-country-or-region/",
+      "name": "data-recipient-country-or-region",
+      "label": "por País ou região recetor",
+      "field": "recipient_country_or_region"
+    },
+    {
+      "path": "/pt/data/reporting-organisation/",
+      "name": "data-reporting-organisation",
+      "label": "por Organização relatora",
+      "field": "reporting_organisation"
+    },
+    {
+      "path": "/data/sector-category/",
+      "name": "data-sector-category",
+      "label": "por Sector",
+      "field": "sector_category"
+    }
+  ],
+  "translations": {
+    "selectCountry": "Selecione um país",
+    "downloadFile": "Descarregar arquivo",
+    "lastUpdated": "Última atualização:",
+    "language": "Idioma"
+  },
+  "countriesCurrenciesFields": [
+    {
+      "key": "countryCode",
+      "label": "Código do país"
+    },
+    {
+      "key": "countryName",
+      "label": "Nome do país"
+    },
+    {
+      "key": "currency",
+      "label": "Moeda"
+    }
+  ],
+  "languageOptions": [
+    {"value": "en", "text": "inglês"},
+    {"value": "fr", "text": "francês"},
+    {"value": "es", "text": "espanhol"},
+    {"value": "pt", "text": "português"}
+  ]
+}
