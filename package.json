@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
-    "gen-gh": "DEPLOY_ENV=GH_PAGES nuxt generate",
+    "gen-gh": "NODE_OPTIONS=--openssl-legacy-provider DEPLOY_ENV=GH_PAGES nuxt generate",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
