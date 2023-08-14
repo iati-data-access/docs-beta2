@@ -64,7 +64,9 @@ export default {
 
   fontawesome: {
     icons: {
-      solid: ['faGear', 'faDownload', 'faTable', 'faChartSimple', 'faMap', 'faWandMagicSparkles'],
+      solid: ['faGear', 'faDownload', 'faTable',
+        'faChartSimple', 'faMap', 'faWandMagicSparkles',
+        'faMagnifyingGlass', 'faXmark', 'faBarsStaggered'],
       regular: []
     }
   },
@@ -129,7 +131,7 @@ export default {
   // Plausible
   plausible: {
     domain: 'countrydata.iatistandard.org',
-    enableAutoOutboundTracking: true,
+    enableAutoOutboundTracking: false,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

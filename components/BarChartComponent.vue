@@ -1,12 +1,12 @@
 <template>
   <div>
-    <BarChart
-      :data="chartData"
-      :options="barChartOptions"
+    <Bar
+      :chart-data="chartData"
+      :chart-options="barChartOptions"
       class="bar-chart"
       :style="barChartHeight"
       ref="barChart"
-      ></BarChart>
+      ></Bar>
   </div>
 </template>
 <style scoped>
@@ -16,13 +16,15 @@
 }
 </style>
 <script>
-import BarChart from '~/components/charts/bar-chart'
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
   data() {
     return {
-      isBusy: true,
-      valueLabel: `${this.$t('dataDashboards.amount')} (${this.currency.toUpperCase()})`
+      isBusy: true
     }
   },
   props: {
@@ -49,7 +51,7 @@ export default {
     }
   },
   components: {
-    BarChart
+    Bar
   },
   methods: {
     handleClick(evt, item) {
@@ -61,6 +63,12 @@ export default {
     }
   },
   computed: {
+    valueLabel() {
+      return `${this.$t('dataDashboards.amount')} (${this.selectedCurrencyLabel})`
+    },
+    selectedCurrencyLabel() {
+      return this.$t('dataDashboards.currencies')[this.currency]
+    },
     barChartHeight() {
       return `height: ${this.height};`
     },
@@ -69,7 +77,7 @@ export default {
         onClick: this.handleClick,
         onHover: (event, chartElement) => {
           if (this.clickable == false) { return }
-          event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+          event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
         },
         maintainAspectRatio: false,
         tooltips: {
@@ -79,7 +87,7 @@ export default {
             }),
             label: ((tooltipItem, data) => {
               const datasetLabel = data.datasets[tooltipItem.datasetIndex].label
-              var label = `${datasetLabel} (${this.currency.toUpperCase()})` || '';
+              var label = `${datasetLabel} (${this.selectedCurrencyLabel})` || '';
 
               if (label) {
                   label += ': ';
@@ -93,41 +101,38 @@ export default {
           }
         },
         scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                callback: function(tick) {
-                  return tick.toLocaleString(undefined, {
-                    maximumFractionDigits: 0,
-                    minimumFractionDigits: 0
-                  })
+          yAxis: {
+            ticks: {
+              beginAtZero: true,
+              callback: function(tick) {
+                return tick.toLocaleString(undefined, {
+                  maximumFractionDigits: 0,
+                  minimumFractionDigits: 0
+                })
+              }
+            },
+            title: {
+              display: true,
+              text: this.valueLabel
+            }
+          },
+          xAxis: {
+            ticks: {
+              callback: function(value, index, ticks) {
+                const tick = this.getLabelForValue(value)
+                const characterLimit = 20
+                if (tick?.length >= characterLimit) {
+                  return (
+                    tick
+                      .slice(0, tick.length)
+                      .substring(0, characterLimit - 1)
+                      .trim() + '...'
+                  )
                 }
-              },
-              scaleLabel: {
-                display: true,
-                labelString: this.valueLabel
+                return tick
               }
             }
-          ],
-          xAxes: [
-            {
-              ticks: {
-                callback: function(tick) {
-                  const characterLimit = 20
-                  if (tick?.length >= characterLimit) {
-                    return (
-                      tick
-                        .slice(0, tick.length)
-                        .substring(0, characterLimit - 1)
-                        .trim() + '...'
-                    )
-                  }
-                  return tick
-                }
-              }
-            }
-          ]
+          }
         }
       }
     },

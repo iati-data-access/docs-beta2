@@ -24,77 +24,70 @@
             ></b-form-radio-group>
           </b-form-group>
 
-
-          <b-form-group
-            :label="$t('dataDashboards.budgetsSpending.budgetsOrSpending')"
-            :class="horizontal ? 'mr-4 mt-2': 'mt-2 mb-0'">
-            <b-form-radio-group
-              v-model="setFields.transaction_type"
-              size="md"
-              button-variant="outline-secondary"
-              :stacked="!horizontal"
-              :class="!horizontal ? 'w-100': null"
-              buttons>
-              <b-form-radio
-                :class="option.class"
-                :value="option.value"
-                v-for="option in budgetsSpendingOptions"
-                v-bind:key="option.text">
-                {{ option.text }}
-              </b-form-radio>
-            </b-form-radio-group>
-          </b-form-group>
-            <!--
+          <template v-if="simpleTransactionTypes">
+            <b-form-group
+              :label="$t('dataDashboards.budgetsSpending.budgetsOrSpending')"
+              :class="horizontal ? 'mr-4 mt-2': 'mt-2 mb-0'">
+              <b-form-radio-group
+                v-model="setFields_.transaction_type"
+                size="md"
+                button-variant="outline-secondary"
+                :stacked="!horizontal"
+                :class="!horizontal ? 'w-100': null"
+                buttons>
+                <b-form-radio
+                  :class="option.class"
+                  :value="option.value"
+                  v-for="option in budgetsSpendingOptions"
+                  v-bind:key="option.text">
+                  {{ option.text }}
+                </b-form-radio>
+              </b-form-radio-group>
+            </b-form-group>
             <b-btn
               v-if="customPage"
-              class="mt-0"
+              class="mt-0 w-100"
               variant="link"
               size="sm"
               @click="simpleTransactionTypes=false">{{ $t('dataDashboards.switchTransactionTypes.toAdvanced') }}</b-btn>
-            -->
-          <!--
-          <template v-if="simpleTransactionTypes">
           </template>
           <template v-else>
-            <b-form-group
-              :label="$t('dataDashboards.transactionTypes')"
-              :class="horizontal ? 'mr-4 mt-2': 'mt-2 mb-0'">
-              <v-select
-                multiple
-                v-model="setFields.transaction_type"
-                :options="fields.transaction_type"
-                :reduce="item => item.code">
-              </v-select>
-            </b-form-group>
+            <DataBrowserFilterItem
+              field="transaction_type"
+              :fieldOptions="fields.transaction_type"
+              :fieldLabel="$t('dataDashboards.transactionTypes')"
+              :value="setFields_.transaction_type"
+              :updateField="updateField"
+              :advancedSearch="advancedSearchFn">
+            </DataBrowserFilterItem>
             <b-btn
-              class="mt-0"
+              class="mt-0 w-100"
               variant="link"
               size="sm"
               @click="simpleTransactionTypes=true">{{ $t('dataDashboards.switchTransactionTypes.toSimple') }}</b-btn>
           </template>
-          -->
 
-          <b-form-group
-            :label="$t('dataDashboards.calendarYear')"
+          <DataBrowserFilterItem
+            field="year"
+            :fieldOptions="fields.year"
+            :fieldLabel="$t('dataDashboards.calendarYear')"
+            :value="setFields_.year"
+            :updateField="updateField"
+            :advancedSearch="advancedSearchFn"
             style="min-width: 200px;"
             :class="horizontal ? 'mr-4 mt-2': 'mt-2'">
-            <v-select
-              :options="years"
-              multiple
-              v-model="setFields.year"
-              style="min-width: 200px;"></v-select>
-          </b-form-group>
+          </DataBrowserFilterItem>
 
-          <b-form-group
-            :label="$t('dataDashboards.calendarYearAndQuarter')"
-            style="min-width: 200px;"
-            class="mt-2">
-            <v-select
-              :options="calendar_years_and_quarters"
-              multiple
-              v-model="setFields.calendar_year_and_quarter"
-              style="min-width: 200px;"></v-select>
-          </b-form-group>
+          <DataBrowserFilterItem
+            field="calendar_year_and_quarter"
+            :fieldOptions="fields.calendar_year_and_quarter"
+            :fieldLabel="$t('dataDashboards.calendarYearAndQuarter')"
+            :value="setFields_.calendar_year_and_quarter"
+            :updateField="updateField"
+            :advancedSearch="advancedSearchFn"
+            formGroupStyle="min-width: 200px;"
+            :formGroupClass="horizontal ? 'mr-4 mt-2': 'mt-2'">
+          </DataBrowserFilterItem>
 
         </b-form>
         <!-- Year -->
@@ -111,7 +104,7 @@
     <b-row v-if="selectedFiltersText && horizontal">
       <b-col>
         <hr />
-        <DataBrowserFiltersText :setFields="setFields" :excludeFilters="excludeFilters" />
+        <DataBrowserFiltersText :setFields="setFields_" :excludeFilters="excludeFilters" />
       </b-col>
     </b-row>
     <b-row v-if="horizontal">
@@ -120,22 +113,88 @@
       </b-col>
     </b-row>
     <b-modal v-model="showFilters" title="Filters" ok-only ok-title="Close" size="xl">
-      <b-row cols="3" class="p-3">
-        <b-col
-          class="p-2"
-          v-for="field in Object.keys(fields)"
-          v-if="!excludeFilters.includes(field) && !hideFilters.includes(field)"
-          v-bind:key="field">
-          <DataBrowserFilterItem
-            :field="field"
-            :fieldOptions="fields[field]"
-            :fieldLabel="$tc(`dataDashboards.availableDrilldowns.${field}`)"
-            :updateField="updateField"
-            :value="setFields[field]">
-          </DataBrowserFilterItem>
-        </b-col>
-      </b-row>
+      <b-card title="Filter by standard codelists" class="mb-3">
+        <b-card-text>Select one or more options in each of the drop-downs.
+        Results update automatically.</b-card-text>
+        <b-row class="p-3">
+          <b-col
+            lg="4"
+            class="p-2"
+            v-for="field in Object.keys(fields)"
+            v-if="!excludeFilters.includes(field) && !hideFilters.includes(field)"
+            v-bind:key="field">
+            <DataBrowserFilterItem
+              :field="field"
+              :fieldOptions="fields[field]"
+              :fieldLabel="$tc(`dataDashboards.availableDrilldowns.${field}`)"
+              :updateField="updateField"
+              :value="setFields_[field]"
+              :advancedSearch="advancedSearch">
+            </DataBrowserFilterItem>
+          </b-col>
+        </b-row>
+      </b-card>
+      <b-card title="Filter by specific activities, provider or receiver organisations">
+        <b-card-text>Type to search and select for specific values across all activities.
+        Results update automatically.</b-card-text>
+        <b-row class="p-3">
+          <b-col
+            lg="4"
+            class="p-2">
+            <DataBrowserFilterItem
+              field="activity.iati_identifier"
+              :fieldLabel="availableDrilldowns['activity.iati_identifier']"
+              :updateField="updateField"
+              :value="setFields_['activity.iati_identifier']"
+              :searchMembers="true"
+              :advancedSearch="advancedSearch">
+            </DataBrowserFilterItem>
+          </b-col>
+          <b-col
+            lg="4"
+            class="p-2">
+            <DataBrowserFilterItem
+              :field="`activity.title_${lang}`"
+              :fieldLabel="availableDrilldowns['activity.title']"
+              :updateField="updateField"
+              :value="setFields_[`activity.title_${lang}`]"
+              :searchMembers="true"
+              :advancedSearch="advancedSearch">
+            </DataBrowserFilterItem>
+          </b-col>
+          <b-col
+            lg="4"
+            class="p-2">
+            <DataBrowserFilterItem
+              :field="`provider_organisation.name_${lang}`"
+              :fieldLabel="availableDrilldowns['provider_organisation']"
+              :updateField="updateField"
+              :value="setFields_[`provider_organisation.name_${lang}`]"
+              :searchMembers="true"
+              :advancedSearch="advancedSearch">
+            </DataBrowserFilterItem>
+          </b-col>
+          <b-col
+            lg="4"
+            class="p-2">
+            <DataBrowserFilterItem
+              :field="`receiver_organisation.name_${lang}`"
+              :fieldLabel="availableDrilldowns['receiver_organisation']"
+              :updateField="updateField"
+              :value="setFields_[`receiver_organisation.name_${lang}`]"
+              :filterFromOptions="true"
+              :searchMembers="true"
+              :advancedSearch="advancedSearch">
+            </DataBrowserFilterItem>
+          </b-col>
+        </b-row>
+      </b-card>
     </b-modal>
+    <AdvancedSearch
+      :field="advancedSearchField"
+      :fieldLabel="advancedSearchFieldLabel"
+      :setFields.sync="setFields_"
+      :searchMembers="advancedSearchMembers" />
   </div>
 </template>
 <style>
@@ -154,6 +213,7 @@ import { mapState } from 'vuex'
 import BarChartComponent from '~/components/BarChartComponent'
 import DataBrowserFilterItem from  '~/components/DataBrowserFilterItem'
 import Map from '~/components/Map'
+import AdvancedSearch from '~/components/AdvancedSearch'
 export default {
   props: {
     setFields: {
@@ -185,7 +245,7 @@ export default {
     },
     hideFilters: {
       default() {
-        return []
+        return ['year', 'calendar_year_and_quarter']
       }
     },
     horizontal: {
@@ -204,6 +264,11 @@ export default {
     },
     pageSize: {
       default: null
+    },
+    advancedSearchFn: {
+      default() {
+        return this.advancedSearch
+      }
     }
   },
   data() {
@@ -228,7 +293,18 @@ export default {
       ],
       showFilters: false,
       isBusy: true,
-      currencyOptions: [
+      advancedSearchField: null,
+      advancedSearchFieldLabel: null,
+      advancedSearchItems: [],
+      advancedSearchMembers: false
+    }
+  },
+  computed: {
+    lang() {
+      return this.$i18n.locale
+    },
+    currencyOptions() {
+      var options = [
         {
           value: 'usd',
           text: 'USD'
@@ -238,9 +314,33 @@ export default {
           text: 'EUR'
         }
       ]
-    }
-  },
-  computed: {
+      if ((this.setFields_.recipient_country_or_region) && (this.setFields_.recipient_country_or_region.length == 1)) {
+        options.push(
+          {
+            value: 'local_currrency',
+            text: this.$t('dataDashboards.currencies.local_currrency')
+          }
+        )
+      } else {
+        options.push(
+          {
+            value: 'local_currrency',
+            text: this.$t('dataDashboards.currencies.local_currrency'),
+            disabled: true
+          }
+        )
+      }
+      return options
+    },
+    advancedSearchFields() {
+      if (this.advancedSearchItems.filter(item => {
+        return item.description
+      }).length > 0) {
+        return ['code', 'name', 'description']
+      } else {
+        return ['code', 'name']
+      }
+    },
     customPage() {
       return this.pageName.includes('data-custom')
     },
@@ -251,7 +351,7 @@ export default {
       return this.drilldowns.join(";")
     },
     fieldsForQuery() {
-      return Object.entries(this.setFields).reduce((summary, item) => {
+      return Object.entries(this.setFields_).reduce((summary, item) => {
         // We only want to exclude e.g. the country name when on the country page
         if (this.specificPage) {
           if (item[0] == this.excludeFilters[0]) { return summary }
@@ -272,7 +372,7 @@ export default {
       }, {})
     },
     selectedFiltersText() {
-      return Object.entries(this.setFields).reduce((summary, item) => {
+      return Object.entries(this.setFields_).reduce((summary, item) => {
         // We only want to exclude e.g. the country name when on the country page
         if (this.specificPage) {
           if (item[0] == this.excludeFilters[0]) { return summary }
@@ -288,7 +388,10 @@ export default {
             summary.push({
               filter: this.getDrilldownName(item[0], item[1].length),
               values: item[1].map(itemValue => {
-                return this.fieldsObj[item[0]][itemValue]
+                if (item[0] in this.fieldsObj) {
+                  return this.fieldsObj[item[0]][itemValue]
+                }
+                return itemValue
               })
             })
           }
@@ -296,6 +399,14 @@ export default {
         return summary
       }, []).sort((a,b)=> { return a.filter - b.filter})
 
+    },
+    setFields_: {
+      get() {
+        return this.setFields
+      },
+      set(value) {
+        this.$emit('update:setFields', value)
+      }
     },
     displayAs_: {
       get() {
@@ -321,10 +432,11 @@ export default {
         this.$emit('update:currency', value)
       }
     },...mapState(['codelistLookups', 'fields',
-      'availableDrilldowns', 'years', 'calendar_years_and_quarters'])
+      'availableDrilldowns'])
   },
   components: {
-    DataBrowserFilterItem
+    DataBrowserFilterItem,
+    AdvancedSearch
   },
   methods: {
     getDrilldownName(drilldownName, count=null) {
@@ -336,25 +448,57 @@ export default {
       }
     },
     updateField(field, value) {
-      this.$set(this.setFields, field, value)
+      this.$set(this.setFields, field, value.sort())
       this.$emit('update:setFields', this.setFields)
     },
     updateDrilldowns(drilldowns) {
       this.$emit('update:drilldowns', drilldowns)
     },
     setCustomPageQuery() {
+      var query = {
+        drilldowns: this.drilldownsForQuery,
+        filters: this.fieldsForQuery,
+        displayAs: this.displayAs_
+      }
+      if (this._currency != 'usd') {
+        query.currency = this._currency
+      }
+      if (this.pageSize != 10) {
+        query.pageSize = this.pageSize
+      }
       this.$router.push(this.localePath({
         name: this.pageName,
-        query: {
-          drilldowns: this.drilldownsForQuery,
-          filters: this.fieldsForQuery,
-          displayAs: this.displayAs_,
-          pageSize: this.pageSize_
-        }
+        query
+      }))
+    },
+    setSpecificPageQuery() {
+      var query = {}
+      query.filters = this.fieldsForQuery
+      if (this._currency != 'usd') {
+        query.currency = this._currency
+      }
+      this.$router.push(this.localePath({
+        name: this.pageName,
+        params: { code: this.$route.params.code},
+        query,
+      }))
+    },
+    setNonSpecificPageQuery() {
+      var query = {}
+      query.filters = this.fieldsForQuery
+      if (this._currency != 'usd') {
+        query.currency = this._currency
+      }
+      this.$router.push(this.localePath({
+        name: this.pageName,
+        query
       }))
     },
     customiseFromQuery() {
       if (Object.keys(this.$route.query).length>0) {
+        if (this.$route.query.currency) {
+          this._currency = this.$route.query.currency
+        }
         if (this.customPage) {
           if (this.$route.query.drilldowns) {
             const _drilldowns = this.$route.query.drilldowns.split(";")
@@ -388,25 +532,52 @@ export default {
           })
         }
       }
+    },
+    advancedSearch(field, fieldLabel, searchMembers=false) {
+      this.$bvModal.show('advanced-search')
+      this.advancedSearchField = field
+      this.advancedSearchFieldLabel = fieldLabel
+      this.advancedSearchMembers = searchMembers
     }
   },
   watch: {
-    'setFields.year': {
+    'setFields_.recipient_country_or_region': {
+      handler(value) {
+        if (value.length!=1) {
+          // Reset calendar_year_and_quarter, to avoid conflicts
+          this._currency = 'usd'
+        }
+      }
+    },
+    'setFields_.year': {
       handler(value) {
         if (value.length>0) {
+          // Reset calendar_year_and_quarter, to avoid conflicts
           this.$set(this.setFields, 'calendar_year_and_quarter', [])
         }
       }
     },
-    'setFields.calendar_year_and_quarter': {
+    'setFields_.calendar_year_and_quarter': {
       handler(value) {
         if (value.length>0) {
-          this.$set(this.setFields, 'year', [])
+          // Reset year, to avoid conflicts
+          this.$set(this.setFields_, 'year', [])
         }
       }
     },
     '$route.query'() {
       this.customiseFromQuery()
+    },
+    _currency: {
+      handler() {
+        if (this.customPage) {
+          this.setCustomPageQuery()
+        } else if (this.specificPage) {
+          this.setSpecificPageQuery()
+        } else {
+          this.setNonSpecificPageQuery()
+        }
+      }
     },
     displayAs_: {
       handler() {
@@ -434,16 +605,9 @@ export default {
         if (this.customPage) {
           this.setCustomPageQuery()
         } else if (this.specificPage) {
-          this.$router.push(this.localePath({
-            name: this.pageName,
-            params: { code: this.$route.params.code},
-            query: { filters: this.fieldsForQuery}
-          }))
+          this.setSpecificPageQuery()
         } else {
-          this.$router.push(this.localePath({
-            name: this.pageName,
-            query: { filters: this.fieldsForQuery}
-          }))
+          this.setNonSpecificPageQuery()
         }
       },
       deep: true
@@ -451,7 +615,11 @@ export default {
   },
   mounted: function() {
     this.customiseFromQuery()
+    if (!['["3","4"]','["budget"]','["3","4","budget"]'].includes(JSON.stringify(this.setFields.transaction_type.sort()))) {
+      this.simpleTransactionTypes = false
+    }
     this.$store.dispatch('getCodelists')
+    this.$emit('update:advancedSearchFn', this.advancedSearch)
   }
 }
 </script>

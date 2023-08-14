@@ -45,7 +45,8 @@
           :fieldOptions="fields.recipient_country_or_region"
           :fieldLabel="availableDrilldowns.recipient_country_or_region"
           :value="setFields.recipient_country_or_region"
-          :updateField="updateField">
+          :updateField="updateField"
+          :advancedSearch="advancedSearchFn">
         </DataBrowserFilterItem>
 
         <DataBrowserFilterItem
@@ -53,7 +54,8 @@
           :fieldOptions="fields.reporting_organisation"
           :fieldLabel="availableDrilldowns.reporting_organisation"
           :value="setFields.reporting_organisation"
-          :updateField="updateField">
+          :updateField="updateField"
+          :advancedSearch="advancedSearchFn">
         </DataBrowserFilterItem>
 
         <DataBrowserFilterItem
@@ -61,14 +63,17 @@
           :fieldOptions="fields.sector_category"
           :fieldLabel="availableDrilldowns.sector_category"
           :value="setFields.sector_category"
-          :updateField="updateField">
+          :updateField="updateField"
+          :advancedSearch="advancedSearchFn">
         </DataBrowserFilterItem>
 
         <DataBrowserFilter
           :hide-filters="['recipient_country_or_region',
             'reporting_organisation',
             'sector_category',
-            'transaction_type']"
+            'transaction_type',
+            'year',
+            'calendar_year_and_quarter']"
           :setFields.sync="setFields"
           :currency.sync="currency"
           :horizontal="false"
@@ -76,6 +81,7 @@
           :drilldowns.sync="drilldowns"
           :displayAs.sync="displayAs"
           :pageSize.sync="pageSize"
+          :advancedSearchFn.sync="advancedSearchFn"
         />
       </b-col>
       <b-col md="9" class="mt-2">
@@ -152,6 +158,9 @@ export default {
           this.displayAs = this.$route.query.displayAs
         }
       }
+    },
+    advancedSearchFn() {
+      return
     }
   },
   computed: {

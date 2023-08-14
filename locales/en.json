@@ -11,7 +11,7 @@
     ["/introduction/", "Introduction"],
     ["/methodology/", "Methodology"],
     ["/data-notes/", "Data Notes"],
-    ["/guidance-analysis/", "Guidance and Excel Analysis Dashboards"]
+    ["/guidance-analysis/", "Guidance"]
   ],
   "accessAnalyseOptions": [
     {
@@ -49,11 +49,23 @@
     "calendarYear": "Calendar Year",
     "calendarYearAndQuarter": "Calendar Year and Quarter",
     "moreFilters": "More Filters",
-    "numberOfResults": "Number of results",
+    "totalNumberOfResults": "Total number of results",
+    "numberOfResults": "Number of results to display",
     "displayOptions": "Display options",
     "noResults": "There are no results for your selected filters.",
     "selectSomeOptions": "Select some options, and then click Run on the left.",
     "amount": "Value",
+    "clearField": "Clear",
+    "advancedSearch": "Advanced Search",
+    "noMatchingOptions": "Sorry, no matching options.",
+    "exactSearchTerm": "Type to search...",
+    "advancedSearchFields": {
+      "code": "Code",
+      "name": "Name",
+      "description": "Description",
+      "select": "Select"
+    },
+    "advancedSearchFilter": "Type to search for name or description...",
     "budgetsSpending": {
       "budgetsOrSpending": "Resource Flows",
       "budgets": "Budgets",
@@ -62,8 +74,8 @@
     },
     "transactionTypes": "Transaction Type",
     "switchTransactionTypes": {
-      "toAdvanced": "Switch to advanced: select transaction types",
-      "toSimple": "Switch to simple: select budget and/or spending"
+      "toAdvanced": "Switch to advanced view: select transaction types",
+      "toSimple": "Switch to simple view: select budget and/or spending"
     },
     "reportingOrganisationGroup": {
       "select": "Select groups of reporting organisations for organisations that publish data under multiple reporting organisations.",
@@ -96,6 +108,9 @@
       "activity.iati_identifier": "Activity IATI Identifier",
       "activity.title": "Activity Title",
       "activity.description": "Activity Description",
+      "activity.start_date": "Activity Start Date",
+      "activity.end_date": "Activity End Date",
+      "reporting_organisation_group": "Reporting Organisation Group",
       "reporting_organisation": "Reporting Organisation",
       "reporting_organisation_type": "Reporting Organisation Type",
       "aid_type": "Aid Type",
@@ -112,15 +127,34 @@
       "humanitarian": "Humanitarian / Development",
       "year.year": "Calendar Year",
       "quarter.quarter": "Calendar Quarter",
-      "calendar_year_and_quarter.calendar_year_and_quarter": "Calendar Year and Quarter"
+      "calendar_year_and_quarter.calendar_year_and_quarter": "Calendar Year and Quarter",
+      "transaction_type.code": "Transaction Type"
     },
     "unavailableDrilldowns": {
       "transaction_type": "Resource Flows",
       "year": "Calendar Year | Calendar Years",
       "quarter": "Calendar Quarter | Calendar Quarters",
-      "calendar_year_and_quarter": "Calendar Year and Quarter | Calendar Years and Quarters"
+      "calendar_year_and_quarter": "Calendar Year and Quarter | Calendar Years and Quarters",
+      "receiver_organisation.name_en": "Receiver Organisation",
+      "receiver_organisation.name_fr": "Receiver Organisation (FR)",
+      "receiver_organisation.name_es": "Receiver Organisation (ES)",
+      "receiver_organisation.name_pt": "Receiver Organisation (PT)",
+      "provider_organisation.name_en": "Provider Organisation",
+      "provider_organisation.name_fr": "Provider Organisation (FR)",
+      "provider_organisation.name_es": "Provider Organisation (ES)",
+      "provider_organisation.name_pt": "Provider Organisation (PT)",
+      "activity.title_en": "Activity Title",
+      "activity.title_fr": "Activity Title (FR)",
+      "activity.title_es": "Activity Title (ES)",
+      "activity.title_pt": "Activity Title (PT)"
     },
-    "activity": "Activity"
+    "activity": "Activity",
+    "organisations": "Organisations",
+    "currencies": {
+      "usd": "USD",
+      "eur": "EUR",
+      "local_currrency": "Local Currency"
+    }
   },
   "dataSidebarDropdowns": [
     {

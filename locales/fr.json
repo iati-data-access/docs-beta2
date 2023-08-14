@@ -11,7 +11,7 @@
     ["/fr/introduction/", "Introduction"],
     ["/fr/methodology/", "Méthodologie"],
     ["/fr/data-notes/", "Notes sur les données"],
-    ["/fr/guidance-analysis/", "Lignes directrices et tableaux de bord d’analyse Excel"]
+    ["/fr/guidance-analysis/", "Lignes directrices"]
   ],
   "accessAnalyseOptions": [
     {
@@ -49,11 +49,23 @@
     "calendarYear": "Année civile",
     "calendarYearAndQuarter": "Année et trimestre civils",
     "moreFilters": "Plus de filtres",
+    "totalNumberOfResults": "Nombre total de résultats",
     "numberOfResults": "Nombre de résultats",
     "displayOptions": "Options d’affichage",
     "noResults": "Aucun résultat ne correspond aux filtres sélectionnés.",
     "selectSomeOptions": "Sélectionnez plusieurs options, puis lancez la recherche.",
     "amount": "Valeur",
+    "clearField": "Effacer",
+    "advancedSearch": "Recherche avancée",
+    "noMatchingOptions": "Sorry, no matching options.",
+    "exactSearchTerm": "Type to search...",
+    "advancedSearchFields": {
+      "code": "Code",
+      "name": "Nom",
+      "description": "Description",
+      "select": "Sélectionnez"
+    },
+    "advancedSearchFilter": "Type to search for name or description...",
     "budgetsSpending": {
       "budgetsOrSpending": "Flux de Ressources",
       "budgets": "Budgets",
@@ -62,8 +74,8 @@
     },
     "transactionTypes": "Transaction Type",
     "switchTransactionTypes": {
-      "toAdvanced": "Switch to advanced: select transaction types",
-      "toSimple": "Switch to simple: select budget and/or spending"
+      "toAdvanced": "Passer à la vue avancée : sélectionner les types de transaction",
+      "toSimple": "Passer à la vue simple : sélectionner les budgets et/ou les dépenses"
     },
     "reportingOrganisationGroup": {
       "select": "Sélectionnez des groupes d'organisations déclarantes pour les organisations qui publient des données sous plusieurs organisations déclarantes.",
@@ -96,6 +108,9 @@
       "activity.iati_identifier": "Identifiant de l’IITA",
       "activity.title": "Titre",
       "activity.description": "Activity Description",
+      "activity.start_date": "Date de début de l’activité",
+      "activity.end_date": "Date de fin de l’activité",
+      "reporting_organisation_group": "Groupes d’organismes déclarantes",
       "reporting_organisation": "Organisme déclarant",
       "reporting_organisation_type": "Type d’organisme déclarant",
       "aid_type": "Type d’aide",
@@ -112,15 +127,34 @@
       "humanitarian": "Humanitaire ou Développement",
       "year.year": "Année civile",
       "quarter.quarter": "Trimestre civil",
-      "calendar_year_and_quarter.calendar_year_and_quarter": "Année et trimestre civils"
+      "calendar_year_and_quarter.calendar_year_and_quarter": "Année et trimestre civils",
+      "transaction_type.code": "Flux de Ressources"
     },
     "unavailableDrilldowns": {
       "transaction_type": "Flux de Ressources",
       "year": "Année civile",
       "quarter": "Trimestre civil",
-      "calendar_year_and_quarter": "Année et trimestre civils"
+      "calendar_year_and_quarter": "Année et trimestre civils",
+      "receiver_organisation.name_en": "Organisme bénéficiaire (EN)",
+      "receiver_organisation.name_fr": "Organisme bénéficiaire",
+      "receiver_organisation.name_es": "Organisme bénéficiaire (ES)",
+      "receiver_organisation.name_pt": "Organisme bénéficiaire (PT)",
+      "provider_organisation.name_en": "Organisme prestataire (EN)",
+      "provider_organisation.name_fr": "Organisme prestataire",
+      "provider_organisation.name_es": "Organisme prestataire (ES)",
+      "provider_organisation.name_pt": "Organisme prestataire (PT)",
+      "activity.title_en": "Titre",
+      "activity.title_fr": "Titre",
+      "activity.title_es": "Titre (ES)",
+      "activity.title_pt": "Titre (PT)"
     },
-    "activity": "Activité"
+    "activity": "Activité",
+    "organisations": "Organismes",
+    "currencies": {
+      "usd": "USD",
+      "eur": "EUR",
+      "local_currrency": "Monnaie locale"
+    }
   },
   "dataSidebarDropdowns": [
     {

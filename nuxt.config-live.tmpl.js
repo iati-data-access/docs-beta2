@@ -73,7 +73,9 @@ export default {
 
   fontawesome: {
     icons: {
-      solid: ['faGear', 'faDownload', 'faTable', 'faChartSimple', 'faMap', 'faWandMagicSparkles'],
+      solid: ['faGear', 'faDownload', 'faTable',
+        'faChartSimple', 'faMap', 'faWandMagicSparkles',
+        'faMagnifyingGlass', 'faXmark', 'faBarsStaggered'],
       regular: []
     }
   },
@@ -127,7 +129,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    baseURL: 'https://cdfd.iati.opendataservices.coop/api'
+    baseURL: 'https://cdfd.emergentally.com/api'
   },
 
   // Google Tag Manager
@@ -138,7 +140,7 @@ export default {
   // Plausible
   plausible: {
     domain: 'countrydata.iatistandard.org',
-    enableAutoOutboundTracking: true,
+    enableAutoOutboundTracking: false,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

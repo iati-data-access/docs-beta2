@@ -11,7 +11,7 @@
     ["/pt/introduction/", "Introdução"],
     ["/pt/methodology/", "Metodologia"],
     ["/pt/data-notes/", "Notas sobre os dados"],
-    ["/pt/guidance-analysis/", "Orientações e painéis de análise Excel"]
+    ["/pt/guidance-analysis/", "Orientações"]
   ],
   "accessAnalyseOptions": [
     {
@@ -49,11 +49,23 @@
     "calendarYear": "Ano civil",
     "calendarYearAndQuarter": "Ano e trimestre civis",
     "moreFilters": "Ano e trimestre civis",
+    "totalNumberOfResults": "Número total de resultados",
     "numberOfResults": "Número de resultados",
     "displayOptions": "Opções de apresentação",
     "noResults": "Não há resultados para os filtros que selecionou",
     "selectSomeOptions": "Selecione algumas opções e clique em Executar à esquerda.",
     "amount": "Valor",
+    "clearField": "Apagar",
+    "advancedSearch": "Busca Avançada",
+    "noMatchingOptions": "Sorry, no matching options.",
+    "exactSearchTerm": "Type to search...",
+    "advancedSearchFields": {
+      "code": "Código",
+      "name": "Nome",
+      "description": "Description",
+      "select": "Selecione"
+    },
+    "advancedSearchFilter": "Type to search for name or description...",
     "budgetsSpending": {
       "budgetsOrSpending": "Fluxos de Recursos",
       "budgets": "Orçamentos",
@@ -62,8 +74,8 @@
     },
     "transactionTypes": "Transaction Type",
     "switchTransactionTypes": {
-      "toAdvanced": "Switch to advanced: select transaction types",
-      "toSimple": "Switch to simple: select budget and/or spending"
+      "toAdvanced": "Passar para a vista avançada: selecionar tipos de transação",
+      "toSimple": "Mudar para a vista simples: selecionar orçamentos e/ou despesas"
     },
     "reportingOrganisationGroup": {
       "select": "Selecione grupos de organizações relatórios para organizações que publicam dados em várias organizações relatórios.",
@@ -96,6 +108,9 @@
       "activity.iati_identifier": "Identificador de atividade da IATI",
       "activity.title": "Título da atividade",
       "activity.description": "Activity Description",
+      "activity.start_date": "Data do início de atividade",
+      "activity.end_date": "Data do fim de atividade",
+      "reporting_organisation_group": "Grupo de organizações relatórios",
       "reporting_organisation": "Organização relatora",
       "reporting_organisation_type": "Tipo de organização relatora",
       "aid_type": "Tipo de ajuda",
@@ -112,15 +127,34 @@
       "humanitarian": "Humanitário / desenvolvimento",
       "year.year": "Ano civil",
       "quarter.quarter": "Trimestre civil",
-      "calendar_year_and_quarter.calendar_year_and_quarter": "Ano e trimestre civis"
+      "calendar_year_and_quarter.calendar_year_and_quarter": "Ano e trimestre civis",
+      "transaction_type.code": "Fluxos de Recurso"
     },
     "unavailableDrilldowns": {
       "transaction_type": "Fluxos de Recurso",
       "year": "Ano civil",
       "quarter": "Trimestre civil",
-      "calendar_year_and_quarter": "Ano e trimestre civis"
+      "calendar_year_and_quarter": "Ano e trimestre civis",
+      "receiver_organisation.name_en": "Receiver Organisation",
+      "receiver_organisation.name_fr": "Receiver Organisation (FR)",
+      "receiver_organisation.name_es": "Receiver Organisation (ES)",
+      "receiver_organisation.name_pt": "Receiver Organisation",
+      "provider_organisation.name_en": "Provider Organisation",
+      "provider_organisation.name_fr": "Provider Organisation (FR)",
+      "provider_organisation.name_es": "Provider Organisation (ES)",
+      "provider_organisation.name_pt": "Provider Organisation",
+      "activity.title_en": "Título da atividade (EN)",
+      "activity.title_fr": "Título da atividade (FR)",
+      "activity.title_es": "Título da atividade (ES)",
+      "activity.title_pt": "Título da atividade"
     },
-    "activity": "Atividade"
+    "activity": "Atividade",
+    "organisations": "Organizações",
+    "currencies": {
+      "usd": "USD",
+      "eur": "EUR",
+      "local_currrency": "Local Currency"
+    }
   },
   "dataSidebarDropdowns": [
     {
@@ -159,7 +193,7 @@
     },
     {
       "key": "currency",
-      "label": "Moeda"
+      "label": "Moeda local"
     }
   ],
   "languageOptions": [
