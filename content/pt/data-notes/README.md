@@ -53,10 +53,6 @@ A tabela de Excel descarregável contém mais dados, incluindo os últimos dois 
 
 A tabela identificará lacunas gerais de dados das quais possa ser necessário o conhecimento. As lacunas de dados (onde se encontrou 0,00 USD) estão destacadas em amarelo.
 
-<a
-  href="https://countrydata.iatistandard.org/data/summary_year.xlsx"
-  class="download-button">Descarregar esta tabela em formato Excel →</a>
-
 <data-gaps-year></data-gaps-year>
 
 ## 3.3 Moeda local para cada país
@@ -65,3 +61,10 @@ A tabela identificará lacunas gerais de dados das quais possa ser necessário o
 
 
 [^1]: Indica se este gasto originalmente fazia parte de um projeto plurinacional e se o financiamento para este país foi calculado com base nas repartições percentuais da atividade entre os países.
+
+## 3.4 Estado da importação de dados
+
+A tabela seguinte mostra quando cada conjunto de dados foi atualizado na base de dados.
+
+<data-processing></data-processing>
+

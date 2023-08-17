@@ -53,11 +53,6 @@ Le tableau Excel offert au téléchargement contient plus de données, y compris
 
 Cette analyse permet de repérer les absences générales de données dont il peut être nécessaire d’avoir connaissance. Les données manquantes (champs pour lesquels le traitement des données aboutit à 0,00 dollar US) sont marquées de jaune.
 
-
-<a
-  href="https://countrydata.iatistandard.org/data/summary_year.xlsx"
-  class="download-button">Télécharger ce tableau au format Excel →</a>
-
 <data-gaps-year></data-gaps-year>
 
 ## 3.3 Devise locale pour chaque pays
@@ -66,3 +61,10 @@ Cette analyse permet de repérer les absences générales de données dont il pe
 
 
 [^1]: Indique si la dépense a initialement été engagée dans le cadre d’un projet multipays, en plus de si les financements accordés au pays ont été calculés en fonction de la répartition en pourcentage de l’activité entre les pays.
+
+## 3.4 Statut de l'importation des données
+
+Le tableau suivant indique la date à laquelle chaque jeu de données a été mis à jour dans la base de données.
+
+<data-processing></data-processing>
+
