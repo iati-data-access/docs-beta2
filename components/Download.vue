@@ -2,7 +2,7 @@
   <div :class="containerClass">
     <template v-if="preparingFile">
       <b-btn variant="secondary" :size="size" @click.prevent="getActivitiesFile" :href="url">
-        <b-spinner label="Preparing" small></b-spinner> Preparing file...
+        <b-spinner label="Preparing" small></b-spinner> {{ $t('translations.preparingFile') }}
       </b-btn>
     </template>
     <template v-else>
@@ -13,6 +13,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 import { saveAs } from 'file-saver'
 export default {
   data() {
@@ -43,8 +44,7 @@ export default {
   methods: {
     async getActivitiesFile() {
       this.preparingFile = true
-      await this.$axios({url: this.url,
-        method: 'GET',
+      await axios.get(this.url, {method: 'GET',
         responseType: 'blob'}).then(response => {
         if (response.status === 200) {
           saveAs(

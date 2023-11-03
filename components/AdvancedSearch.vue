@@ -3,6 +3,7 @@
     :title="field ? `${$t('dataDashboards.advancedSearch')} - ${fieldLabel}`: null"
     id="advanced-search"
     ok-only
+    :ok-title="$t('dataDashboards.close')"
     size="xl">
     <b-row v-if="items" class="mb-3">
       <b-col class="my-1" lg="6">
@@ -25,7 +26,7 @@
               :debounce="searchMembers ? 500 : null"
             ></b-form-input>
             <b-input-group-append>
-              <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+              <b-button :disabled="!filter" @click="filter = ''">{{ $t('dataDashboards.clearField') }}</b-button>
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
@@ -70,11 +71,14 @@
       <template #table-busy>
         <div class="text-center text-secondary my-2">
           <b-spinner class="align-middle"></b-spinner>
-          <strong>Loading...</strong>
+          <strong>{{ $t('dataDashboards.loading') }}</strong>
         </div>
       </template>
       <template #empty="scope">
-        <p class="text-center text-secondary">{{ scope.emptyText }}</p>
+        <p class="text-center text-secondary">{{ $t('dataDashboards.advancedSearchEmptyText') }}</p>
+      </template>
+      <template #emptyFiltered="scope">
+        <p class="text-center text-secondary">{{ $t('dataDashboards.advancedSearchEmptyFilteredText') }}</p>
       </template>
     </b-table>
     <b-form-group
